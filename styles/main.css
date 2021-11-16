@@ -1,3 +1,41 @@
-.grid {
+body {
+
+}
+.grid-wrapper {
+  height: 90vh;
+  display: flex;
   
+  justify-content: center;
+}
+
+.grid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 black;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+}
+
+.grid div {
+  border:1px solid grey;
+  flex-grow: 1;
+  height: 10%;
+  width: 10%;
+}
+
+.grid div.frog {
+  background-image: url('/Users/admin/development/projects/project-1/JackedFrog.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.grid div.carLaneOne {
+  background-image: url('/Users/admin/development/projects/project-1/carLaneOne.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
 }
