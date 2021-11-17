@@ -3,10 +3,19 @@
 }
 
 body {
-  
+  background-color:forestgreen;
+  /* height: 25vh; */
+}
+.controls-wrapper {
+display: flex;
+justify-content: space-evenly;
+background: red;
+}
+.start {
+  height: 5;
 }
 .grid-wrapper {
-  height: 90vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +29,7 @@ body {
   justify-content: center;
   height: 600px;
   width: 600px;
+  background-color: white;
 }
 
 .grid div {
@@ -56,3 +66,51 @@ body {
   background-size: contain;
   cursor: pointer;
 }
+
+.grid div.logLaneOne {
+  background-image: url('/Users/admin/development/projects/project-1/logLaneOne.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  background-color: blue;
+  background-position: center;
+}
+
+.grid div.logLaneTwo {
+  background-image: url('/Users/admin/development/projects/project-1/logLaneTwo.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  background-color: blue;
+}
+
+.grid div.logLaneThree {
+  background-image: url('/Users/admin/development/projects/project-1/logLaneThree.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  background-color: blue;
+  background-position: center;
+}
+
+.grid div.riverLaneOne {
+  /* background-image: url('/Users/admin/development/projects/project-1/riverLaneOne.jpg'); */
+  background-color: blue;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+/* .grid div.riverLaneTwo {
+  background-image: url('/Users/admin/development/projects/project-1/riverLaneTwo.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.grid div.riverLaneThree {
+  background-image: url('/Users/admin/development/projects/project-1/riverLaneThree.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+} */
