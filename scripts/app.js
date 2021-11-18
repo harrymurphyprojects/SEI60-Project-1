@@ -1,32 +1,3 @@
-//  .-----.
-// /7  .  (
-//  /   .-.  \
-// /   /   \  \
-//  / `  )   (   )
-// / `   )   ).  \
-// .'  _.   \_/  . |
-//  .--.           .' _.' )`.        |
-// (    `---...._.'   `---.'_)    ..  \
-//  \            `----....___    `. \  |
-// `.           _ ----- _   `._  )/  |
-// `.       /"  \   /"  \`.  `._   |
-// `.    ((O)` ) ((O)` ) `.   `._\
-// `-- '`---'   `---' )  `.    `-.
-//  /                  ` \      `-.
-//  .'                      `.       `.
-// /                     `  ` `.       `-.
-//  .--.   \ ===._____.======. `    `   `. .___.--`     .''''.
-// ' .` `-. `.                )`. `   ` ` \          .' . '  8)
-//  (8  .  ` `-.`.               ( .  ` `  .`\      .'  '    ' /
-// \  `. `    `-.               ) ` .   ` ` \  .'   ' .  '  /
-//  \ ` `.  ` . \`.    .--.     |  ` ) `   .``/   '  // .  /
-// `.  ``. .   \ \   .-- `.  (  ` /_   ` . / ' .  '/   .'
-// `. ` \  `  \ \  '-.   `-'  .'  `-.  `   .  .'/  .'
-// \ `.`.  ` \ \    ) /`._.`       `.  ` .  .'  /
-// LGB    |  `.`. . \ \  (.'               `.   .'  .'
-// __/  .. \ \ ` ) \                     \.' .. \__
-//  .-._.-'     '"  ) .-'   `.                   (  '"     `-._.--.
-// (_________.-====' / .' /\_)`--..__________..-- `====-. _________)
 
 //======================================= Frogger Game =======================================
 
@@ -40,11 +11,16 @@ console.log(startButton)
 
 const grid = document.querySelector('.grid')
 const cells = []
-let frogPosition = 4
+let frogPosition = 94
+const livesDisplay = document.querySelector('#lives-display')
+let lives = 3
 
 let laneOnePosition = 69
-let laneTwoPosition = 70
+let laneTwoPosition = 79
 let laneThreePosition = 89
+let roadOnePosition = [60, 61, 62 ,63, 64, 65, 66, 67, 68, 69] 
+let roadTwoPosition = [70, 71, 72 ,73, 74, 75, 76, 77, 78, 79] 
+let roadThreePosition = [80, 81, 82 ,83, 84, 85, 86, 87, 88, 89]
 
 let logOnePosition = [19, 18, 14, 13, 12]
 let logTwoPosition = [29, 26, 25, 20, 21, 20]
@@ -53,7 +29,7 @@ let riverOnePosition = [17, 16, 15, 11, 10]
 let riverTwoPosition = [28, 27, 24, 23, 22]
 let riverThreePosition = [38, 37, 36, 32, 31]
 
-// const riverArray = cells[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+
 // ======================================= Grid Building ======================================= 
 function createGrid() {
   for (let i = 0; i < gridCellCount; i++) {
@@ -65,20 +41,18 @@ function createGrid() {
 }
 createGrid()
 
-// ======================================= Frog Functions =======================================
-function removeFrog() {
-  cells[frogPosition].classList.remove('frog')
-}
-
-function addFrog() {
-  cells[frogPosition].classList.add('frog')
-}
+// ======================================= Start Functions =======================================
 
 function handleStart() {
   addFrog()
+  
+  handleRoadOne()
+  handleRoadTwo()
+  handleRoadThree()
   handleCarLaneOne()
   handleCarLaneTwo()
   handleCarLaneThree()
+
   handleLogOne()
   handleLogTwo()
   handleLogThree()
@@ -87,7 +61,18 @@ function handleStart() {
   handleRiverThree()
 
   collisonCar()
-  // collisonWater()
+  collisonWater()
+  gameOver()
+}
+
+// ======================================= Frog Functions =======================================
+
+function removeFrog() {
+  cells[frogPosition].classList.remove('frog')
+}
+
+function addFrog() {
+  cells[frogPosition].classList.add('frog')
 }
 
 function handleKeyUp(e) {
@@ -119,9 +104,124 @@ function handleKeyUp(e) {
       console.log('Invalid Key.')
   }
   addFrog()
+  collisonWater()
 }
 
-//======================================= Road/Car Functions =======================================
+// function floatCheck {
+// if (frogPosition = logOnePosition) {
+
+// }
+// }
+
+function gameOver() {
+  if (lives === 0) {
+    console.log('Game Over YOU SUCK')
+  }
+}
+
+function collisonWater() {
+  if (
+    (cells[frogPosition].classList.contains('riverLaneOne')) ||
+    (cells[frogPosition].classList.contains('carLaneOne')) ||
+    (cells[frogPosition].classList.contains('carLaneTwo')) ||
+    (cells[frogPosition].classList.contains('carLaneThree'))
+  ) {
+    removeFrog() 
+    frogPosition = 94
+    lives = lives - 1
+    console.log(lives + ' Lives Remaining')
+    addFrog()
+    gameOver()
+  }
+}
+
+//======================================= Road Functions =======================================
+
+function removeRoadOne() {
+  roadTwoPosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.remove('road')
+  })
+}
+
+function addRoadOne() {
+  roadOnePosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.add('road')
+  })
+}
+
+function handleRoadOne() {
+  window.setInterval(() => { 
+    // removeRoadOne()
+    const newRoadOne = roadOnePosition.map(indivRoadCell => {
+      indivRoadCell = indivRoadCell - 1
+      if (indivRoadCell === 59) {
+        indivRoadCell = indivRoadCell + width
+      }
+      return indivRoadCell
+    })
+    roadOnePosition = newRoadOne
+    addRoadOne()
+    return
+  }, 200)
+}
+
+function removeRoadTwo() {
+  roadTwoPosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.remove('road')
+  })
+}
+
+function addRoadTwo() {
+  roadTwoPosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.add('road')
+  })
+}
+
+function handleRoadTwo() {
+  window.setInterval(() => { 
+    // removeRoadTwo()
+    const newRoadTwo = roadTwoPosition.map(indivRoadCell => {
+      indivRoadCell = indivRoadCell - 1
+      if (indivRoadCell === 69) {
+        indivRoadCell = indivRoadCell + width
+      }
+      return indivRoadCell
+    })
+    roadTwoPosition = newRoadTwo
+    addRoadTwo()
+    return
+  }, 500)
+}
+
+function removeRoadThree() {
+  roadThreePosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.remove('road')
+  })
+}
+
+function addRoadThree() {
+  roadThreePosition.forEach(indivRoadCell => { 
+    cells[indivRoadCell].classList.add('road')
+  })
+}
+
+function handleRoadThree() {
+  window.setInterval(() => { 
+    // removeRoadThree()
+    const newRoadThree = roadThreePosition.map(indivRoadCell => {
+      indivRoadCell = indivRoadCell - 1
+      if (indivRoadCell === 79) {
+        indivRoadCell = indivRoadCell + width
+      }
+      return indivRoadCell
+    })
+    roadThreePosition = newRoadThree
+    addRoadThree()
+    return
+  }, 500)
+}
+
+//======================================= Car Functions =======================================
 
 function removeLaneOne() {
   cells[laneOnePosition].classList.remove('carLaneOne')
@@ -163,13 +263,13 @@ function handleCarLaneOne() {
 function handleCarLaneTwo() {
   window.setInterval(() => { 
     removeLaneTwo()
-    laneTwoPosition += 1
-    if (laneTwoPosition === 80) {
-      laneTwoPosition = laneTwoPosition - width 
+    laneTwoPosition -= 1
+    if (laneTwoPosition === 69) {
+      laneTwoPosition = laneTwoPosition + width 
     } 
     addLaneTwo()
     return
-  }, 650)
+  }, 500)
 }
 
 function handleCarLaneThree() {
@@ -192,6 +292,7 @@ function collisonCar() {
   ) {
     console.log('game over')
     removeFrog() 
+    lives = lives - 1
     frogPosition = 4
     addFrog()
   }
@@ -310,6 +411,7 @@ function handleRiverOne() {
     })
     riverOnePosition = newRiverOne
     addRiverOne()
+    collisonWater()
     return
   }, 250)
 }
@@ -370,45 +472,7 @@ function handleRiverThree() {
   }, 500)
 }
 
-// function addLogTwo() {
-//   cells[logTwoPosition].classList.add('logLaneTwo')
-// }
 
-// function removeLogTwo() {
-//   cells[logTwoPosition].classList.remove('logLaneTwo')
-// }
-
-// function handleLogRiverTwo() {
-//   window.setInterval(() => { 
-//     removeLogTwo()
-//     logTwoPosition -= 1
-//     if (logTwoPosition === 19) {
-//       logTwoPosition = logTwoPosition + width
-//     }
-//     addLogTwo()
-//     return
-//   }, 500)
-// }
-
-// function addLogThree() {
-//   cells[logThreePosition].classList.add('logLaneThree')
-// }
-
-// function removeLogThree() {
-//   cells[logThreePosition].classList.remove('logLaneThree')
-// }
-
-// function handleLogRiverThree() {
-//   window.setInterval(() => { 
-//     removeLogThree()
-//     logThreePosition -= 1
-//     if (logThreePosition === 29) {
-//       logThreePosition = logThreePosition + width
-//     }
-//     addLogThree()
-//     return
-//   }, 500)
-// }
 //======================================= Event Listeners ======================================= 
 
 startButton.addEventListener('click', handleStart)

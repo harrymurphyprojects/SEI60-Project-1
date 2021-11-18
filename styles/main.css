@@ -46,6 +46,13 @@ background: red;
   cursor: pointer;
 }
 
+.grid div.road {
+  background-color: grey;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
 .grid div.carLaneOne {
   background-image: url('/Users/admin/development/projects/project-1/carLaneOne.jpg');
   background-repeat: no-repeat;
