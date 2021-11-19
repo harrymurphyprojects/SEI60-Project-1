@@ -7,12 +7,15 @@
 const width = 10
 const gridCellCount = width * width
 const startButton = document.querySelector('#start')
+const restartButton = document.querySelector('#restart')
 console.log(startButton)
 
 const grid = document.querySelector('.grid')
 const cells = []
 let frogPosition = 94
+const winPosition = 4
 const livesDisplay = document.querySelector('#lives-display')
+const statusDisplay = document.querySelector('#status-display')
 let lives = 3
 
 let laneOnePosition = 69
@@ -29,12 +32,18 @@ let riverOnePosition = [17, 16, 15, 11, 10]
 let riverTwoPosition = [28, 27, 24, 23, 22]
 let riverThreePosition = [38, 37, 36, 32, 31]
 
+const grass = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+  40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+  50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+  90, 91, 92, 93, 94, 95, 96, 97, 98, 99
+]
 
 // ======================================= Grid Building ======================================= 
 function createGrid() {
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
-    cell.textContent = i
+    // cell.textContent = i
     cells.push(cell)
     grid.appendChild(cell)
   }
@@ -44,6 +53,7 @@ createGrid()
 // ======================================= Start Functions =======================================
 
 function handleStart() {
+  statusDisplay.innerHTML = 'PLAYING'
   addFrog()
   
   handleRoadOne()
@@ -59,10 +69,19 @@ function handleStart() {
   handleRiverOne()
   handleRiverTwo()
   handleRiverThree()
-
-  collisonCar()
+  
+  floatCheck()
   collisonWater()
+
+  addGrass()
   gameOver()
+  gameWin()
+  addWinPoint()
+}
+
+function handleRestart () {
+location.reload()
+handleStart()
 }
 
 // ======================================= Frog Functions =======================================
@@ -73,6 +92,7 @@ function removeFrog() {
 
 function addFrog() {
   cells[frogPosition].classList.add('frog')
+  livesDisplay.innerHTML = lives
 }
 
 function handleKeyUp(e) {
@@ -105,20 +125,42 @@ function handleKeyUp(e) {
   }
   addFrog()
   collisonWater()
+  gameWin()
 }
 
-// function floatCheck {
-// if (frogPosition = logOnePosition) {
-
-// }
-// }
-
-function gameOver() {
-  if (lives === 0) {
-    console.log('Game Over YOU SUCK')
+function floatCheck() {
+  if (cells[logOnePosition].classList.contains('frog')) {
+    window.setInterval(() => { 
+      removeFrog()
+      frogPosition -= 1
+      if (frogPosition === 9) {
+        frogPosition = frogPosition + width
+      }
+      collisonWater()
+      addFrog()
+      return
+    }, 200)
   }
 }
 
+function gameOver() {
+  if (lives === 0) {
+    grid.textContent = 'NO LIVES LEFT - GAME OVER'
+    statusDisplay.innerHTML = 'GAME OVER'
+  }
+}
+
+function gameWin() {
+  cells[winPosition].classList.add('winPoint')
+  if (frogPosition === winPosition) {
+    grid.textContent = 'WINNER WINNER CHICKEN DINNER'
+    statusDisplay.innerHTML = 'YOU WIN - GAME ENDED'
+  }
+}
+
+function addWinPoint() {
+  cells[winPosition].classList.add('winPoint')
+}
 function collisonWater() {
   if (
     (cells[frogPosition].classList.contains('riverLaneOne')) ||
@@ -127,21 +169,20 @@ function collisonWater() {
     (cells[frogPosition].classList.contains('carLaneThree'))
   ) {
     removeFrog() 
-    frogPosition = 94
-    lives = lives - 1
-    console.log(lives + ' Lives Remaining')
+    frogDeath()
     addFrog()
     gameOver()
   }
 }
 
-//======================================= Road Functions =======================================
-
-function removeRoadOne() {
-  roadTwoPosition.forEach(indivRoadCell => { 
-    cells[indivRoadCell].classList.remove('road')
-  })
+function frogDeath() {
+  frogPosition = 94
+  lives = lives - 1
+  console.log(lives + ' Lives Remaining')
+  livesDisplay.innerHTML = lives
 }
+
+//======================================= Road Functions =======================================
 
 function addRoadOne() {
   roadOnePosition.forEach(indivRoadCell => { 
@@ -150,8 +191,7 @@ function addRoadOne() {
 }
 
 function handleRoadOne() {
-  window.setInterval(() => { 
-    // removeRoadOne()
+  window.setInterval(() => {
     const newRoadOne = roadOnePosition.map(indivRoadCell => {
       indivRoadCell = indivRoadCell - 1
       if (indivRoadCell === 59) {
@@ -165,12 +205,6 @@ function handleRoadOne() {
   }, 200)
 }
 
-function removeRoadTwo() {
-  roadTwoPosition.forEach(indivRoadCell => { 
-    cells[indivRoadCell].classList.remove('road')
-  })
-}
-
 function addRoadTwo() {
   roadTwoPosition.forEach(indivRoadCell => { 
     cells[indivRoadCell].classList.add('road')
@@ -179,7 +213,6 @@ function addRoadTwo() {
 
 function handleRoadTwo() {
   window.setInterval(() => { 
-    // removeRoadTwo()
     const newRoadTwo = roadTwoPosition.map(indivRoadCell => {
       indivRoadCell = indivRoadCell - 1
       if (indivRoadCell === 69) {
@@ -193,12 +226,6 @@ function handleRoadTwo() {
   }, 500)
 }
 
-function removeRoadThree() {
-  roadThreePosition.forEach(indivRoadCell => { 
-    cells[indivRoadCell].classList.remove('road')
-  })
-}
-
 function addRoadThree() {
   roadThreePosition.forEach(indivRoadCell => { 
     cells[indivRoadCell].classList.add('road')
@@ -207,7 +234,6 @@ function addRoadThree() {
 
 function handleRoadThree() {
   window.setInterval(() => { 
-    // removeRoadThree()
     const newRoadThree = roadThreePosition.map(indivRoadCell => {
       indivRoadCell = indivRoadCell - 1
       if (indivRoadCell === 79) {
@@ -254,7 +280,7 @@ function handleCarLaneOne() {
     if (laneOnePosition === 59) {
       laneOnePosition = laneOnePosition + width
     }
-    collisonCar()
+    collisonWater()
     addLaneOne()
     return
   }, 200)
@@ -269,7 +295,7 @@ function handleCarLaneTwo() {
     } 
     addLaneTwo()
     return
-  }, 500)
+  }, 700)
 }
 
 function handleCarLaneThree() {
@@ -281,21 +307,7 @@ function handleCarLaneThree() {
     } 
     addLaneThree()
     return
-  }, 500)
-}
-
-function collisonCar() {
-  if (
-    (laneOnePosition === frogPosition) || 
-    (laneTwoPosition === frogPosition) || 
-    (laneThreePosition === frogPosition) 
-  ) {
-    console.log('game over')
-    removeFrog() 
-    lives = lives - 1
-    frogPosition = 4
-    addFrog()
-  }
+  }, 400)
 }
 
 //======================================= Log Functions =======================================
@@ -326,7 +338,7 @@ function handleLogOne() {
     logOnePosition = newLogOne
     addLogOne()
     return
-  }, 250)
+  }, 500)
 }
 
 function removeLogTwo() {
@@ -413,7 +425,7 @@ function handleRiverOne() {
     addRiverOne()
     collisonWater()
     return
-  }, 250)
+  }, 500)
 }
 
 function removeRiverTwo() {
@@ -472,11 +484,19 @@ function handleRiverThree() {
   }, 500)
 }
 
+//======================================= Styles =======================================
+
+function addGrass() {
+  grass.forEach(grassCell => {
+    (cells[grassCell].classList.add('grassBg'))
+  })
+}
 
 //======================================= Event Listeners ======================================= 
 
 startButton.addEventListener('click', handleStart)
 document.addEventListener('keyup', handleKeyUp)
+restartButton.addEventListener('click', handleRestart)
 
 
 

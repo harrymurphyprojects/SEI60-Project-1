@@ -4,12 +4,31 @@
 
 body {
   background-color:forestgreen;
-  /* height: 25vh; */
+  background-image: url('../pond.jpg');
+  background-position: cover;
+  background-size: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+button {
+  text-align: center left;
+	margin:5px;
+  font-weight: bold;
+  padding: 10px ;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+	border-radius: 7px;
+  box-shadow: 0 .2em gray; 
+  cursor: pointer;
+
 }
 .controls-wrapper {
 display: flex;
 justify-content: space-evenly;
-background: red;
+background:forestgreen;
 }
 .start {
   height: 5;
@@ -19,6 +38,7 @@ background: red;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: black;
 }
 
 .grid {
@@ -30,61 +50,77 @@ background: red;
   height: 600px;
   width: 600px;
   background-color: white;
+  background-image: url('../grass.jpg');
+  font-size: 50px;
+  text-align: center;
 }
 
 .grid div {
-  border:1px solid grey;
+  /* border:1px solid grey; */
   flex-grow: 1;
   height: 10%;
   width: 10%;
 }
 
-.grid div.frog {
-  background-image: url('/Users/admin/development/projects/project-1/JackedFrog.jpg');
+.grid div.road {
+  /* background-image: url('../asphalt.jpg'); */
+  background-color: black;
   background-repeat: no-repeat;
-  background-size: contain;
   cursor: pointer;
+  position: relative
 }
 
-.grid div.road {
-  background-color: grey;
+.grid div.frog {
+  background-image: url('../JackedFrog.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  position: relative;
 }
 
 .grid div.carLaneOne {
-  background-image: url('/Users/admin/development/projects/project-1/carLaneOne.jpg');
+  background-image: url('../pinpng.com-cars-top-view-png-5444728.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  background-position: center;
+  position: relative;
+}
+
+div .road .carLaneOne { 
+  position: relative;
+  background-image: url('../birds-eye-view-clip-art-210077.png');
 }
 
 .grid div.carLaneTwo {
-  background-image: url('/Users/admin/development/projects/project-1/carLaneTwo.jpg');
+  background-image: url('../birds-eye-view-clip-art-210077.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  background-position: center;
 }
 
 .grid div.carLaneThree {
-  background-image: url('/Users/admin/development/projects/project-1/carLaneThree.jpg');
+  background-image: url('../birds-eye-view-clip-art-210077.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  background-position: center;
 }
 
 .grid div.logLaneOne {
-  background-image: url('/Users/admin/development/projects/project-1/logLaneOne.jpg');
+  
+  background-image: url('../kisspng-wood-building-materials-paper-deck-lumber-5b3059c2cc9e77.7182640515298953628381.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
   background-color: blue;
   background-position: center;
+  position: relative;
 }
 
 .grid div.logLaneTwo {
-  background-image: url('/Users/admin/development/projects/project-1/logLaneTwo.jpg');
+  background-image: url('../kisspng-wood-building-materials-paper-deck-lumber-5b3059c2cc9e77.7182640515298953628381.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -92,7 +128,7 @@ background: red;
 }
 
 .grid div.logLaneThree {
-  background-image: url('/Users/admin/development/projects/project-1/logLaneThree.png');
+  background-image: url('../kisspng-wood-building-materials-paper-deck-lumber-5b3059c2cc9e77.7182640515298953628381.png');
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
@@ -101,23 +137,68 @@ background: red;
 }
 
 .grid div.riverLaneOne {
-  /* background-image: url('/Users/admin/development/projects/project-1/riverLaneOne.jpg'); */
   background-color: blue;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
 }
 
-/* .grid div.riverLaneTwo {
-  background-image: url('/Users/admin/development/projects/project-1/riverLaneTwo.jpg');
+.grid div.grassBg {
+  background-image: url('../grass.jpg');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
 }
 
-.grid div.riverLaneThree {
-  background-image: url('/Users/admin/development/projects/project-1/riverLaneThree.png');
+.grid div.winPoint {
+  background-image: url('../lily.png');
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
+  position: relative;
+}
+
+div .frog.logLaneOne::before {
+  content: '';
+  background-image: url('../JackedFrog.png');
+  position: absolute;
+  background-size: contain;
+  height: 100%;
+  width: 100%;
+  top: 5%;
+  left: 20%;
+}
+
+div .frog.logLaneTwo::before {
+  content: '';
+  background-image: url('../JackedFrog.png');
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  top: 5%;
+  left: 20%;
+}
+
+div .frog.logLaneThree::before {
+  content: '';
+  background-image: url('../JackedFrog.png');
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  top: 5%;
+  left: 20%;
+}
+
+/* div .road.frog::before {
+  content: '';
+  background-image: url('/Users/admin/development/projects/project-1/JackedFrog.png');
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  top: 5%;
+  left: 20%;
 } */
