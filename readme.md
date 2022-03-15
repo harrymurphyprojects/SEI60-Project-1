@@ -35,7 +35,7 @@ As part of my 12-week software engineering immersive, my first solo project was 
 
 ## Deployment ## 
 
-Deployed here
+Deployed [**here**](https://harrymurphyprojects.github.io/SEI60-Project-1/ "here")
 
 ## Technologies Used ## 
 
@@ -79,6 +79,8 @@ To have an appearance of a game, I created a grid where the Frog can move around
 
 One of the key features of the game is the ability of the frog to move across the grid. The switch statement adds or minus in the x or y-axis depending on which key is pressed. At the end of the switch statement it runs the “collisionWater” and “gameWin” functions, these are to check whether the frog has entered the water or has reached the lilypad for the game win. 
 
+![picture alt](http://via.placeholder.com/200x150 "Title is optional")
+
 ### River functionality ###
 
 How the road, cars, river and logs work is quite similar. Below is the code for the river. To create the river, “riverOnePosition” const are named. Then the “addRiverOne” function uses a “forEach” to populate the array of river cells with the “riverLaneOne” class. 
@@ -86,6 +88,9 @@ How the road, cars, river and logs work is quite similar. Below is the code for 
 Each river cell is moving every 500ms, and then the logs move at the same time to create the illusion that the log is floating down the stream. Once a river cell moves to the far left of the grid, in this case, cell 9, the “handleRiverOne” function uses an “if” statement to add the width (10) onto the individual river cell. This same principle is used for all moving objects to give the illusion that they go off-screen left then loop back through to the right of the screen. 
 
 If the frog touches the water it loses a life, that's why near the bottom of the code the function collisonWater is there. It checks to see if the frog is in a river cell. 
+
+![picture alt](http://via.placeholder.com/200x150 "Title is optional")
+![picture alt](http://via.placeholder.com/200x150 "Title is optional")
 
 ## Bugs ##
 
