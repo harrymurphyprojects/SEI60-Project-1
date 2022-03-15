@@ -73,13 +73,13 @@ For the styling part, I thought it would be best if I go with a more classic ver
 
 To have an appearance of a game, I created a grid where the Frog can move around and the cars and logs have set areas they can move across the screen. I use DOM manipulation and pushed cells into an empty div to create a grid. I looped this to create a 10 x 10 grid.
 
-![create grid](https://i.imgur.com/BGbXObF.png "Create Grid Code")
+![Create Grid](https://i.imgur.com/BGbXObF.png "Create Grid Code")
 
 ### Movement ###
 
 One of the key features of the game is the ability of the frog to move across the grid. The switch statement adds or minus in the x or y-axis depending on which key is pressed. At the end of the switch statement it runs the “collisionWater” and “gameWin” functions, these are to check whether the frog has entered the water or has reached the lilypad for the game win. 
 
-![picture alt](http://via.placeholder.com/200x150 "Title is optional")
+![Movement Code](https://imgur.com/9ea868db-184c-42e9-8ff7-c6168e3d95c9 "Handle Movement Code")
 
 ### River functionality ###
 
