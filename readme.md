@@ -1,5 +1,7 @@
 # Project One Frogger README #
 
+
+
 **Contents** 
 
 * Project Overview
@@ -21,11 +23,11 @@ As part of my 12-week software engineering immersive, my first solo project was 
 
 ## Project Brief ## 
 
-Render a game in the browser.
-Include separate HTML / CSS / JavaScript files.
-Use KISS (Keep It Simple Stupid) and DRY (Don’t Repeat Yourself) principles.
-Deploy the game online, where the rest of the world can access it. 
-Use semantic markup for HTML and CSS (adhere to best practices)
+* Render a game in the browser.
+* Include separate HTML / CSS / JavaScript files.
+* Use KISS (Keep It Simple Stupid) and DRY (Don’t Repeat Yourself) principles.
+* Deploy the game online, where the rest of the world can access it. 
+* Use semantic markup for HTML and CSS (adhere to best practices)
 
 ## Time Frame ## 
 
@@ -53,15 +55,15 @@ The initial plan was to split the week into 3 main sections. Game mechanics (Jav
 
 I didn’t write any code out initially but I did think of what functions I would need to create for the game to work, I arrived at:
 
-Create a grid for players and objects to move along.
-Create cars that have different speeds which move along road areas.
-Create logs that move along river areas, these must be arrays.
-Create frog movement mechanics.
-Create a function that detects whether the frog has been hit by a car.
-Create a river function that detects if the frog has gone into the river.
-Create a death function which after losing a life, respawns the frog at the starting point and deducts a life. 
-Create a function that allows the frog to sit on a log and move with the log.
-Create a game win function when the frog arrives at the lilypad. 
+* Create a grid for players and objects to move along.
+* Create cars that have different speeds which move along road areas.
+* Create logs that move along river areas, these must be arrays.
+* Create frog movement mechanics.
+* Create a function that detects whether the frog has been hit by a car.
+* Create a river function that detects if the frog has gone into the river.
+* Create a death function which after losing a life, respawns the frog at the starting point and deducts a life. 
+* Create a function that allows the frog to sit on a log and move with the log.
+* Create a game win function when the frog arrives at the lilypad. 
 
 For the styling part, I thought it would be best if I go with a more classic version of frogger. I didn’t realise how hard it was going to be to get really good png images to use, but I’ll talk more about that in the challenges section.
 
@@ -70,6 +72,8 @@ For the styling part, I thought it would be best if I go with a more classic ver
 ### Grid ###
 
 To have an appearance of a game, I created a grid where the Frog can move around and the cars and logs have set areas they can move across the screen. I use DOM manipulation and pushed cells into an empty div to create a grid. I looped this to create a 10 x 10 grid.
+
+![create grid](https://i.imgur.com/BGbXObF.png "Create Grid Code")
 
 ### Movement ###
 
